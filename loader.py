@@ -17,6 +17,7 @@ def loadjson():
 	with open(configfile) as file:
 		try :
 			lst = json.load(file)
+			socket = lst['socket']
 		except :
 			print(configfile + " not a valid json file")
 			exit(1)

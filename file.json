@@ -1,5 +1,5 @@
 {
-	"socket":"/tmp/socket.sock",
+	"socket":"./socket",
 	"apps" :
 	[
 		{

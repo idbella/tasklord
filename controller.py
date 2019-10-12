@@ -13,19 +13,24 @@ except socket.error:
     sys.exit(1)
 
 def start():
-    sock.sendall("START")
+    msg = bytes("START", 'UTF-8')
+    sock.sendall(msg)
 
 def status():
-    sock.sendall("STATUS")
+    msg = bytes("STATUS", 'UTF-8')
+    sock.sendall(msg)
 
 def restart():
-    sock.sendall("RESTART")
+    msg = bytes("RESTART", 'UTF-8')
+    sock.sendall(msg)
 
 def stop():
-    sock.sendall("STOP")
+    msg = bytes("STOP", 'UTF-8')
+    sock.sendall(msg)
 
 def reload():
-    sock.sendall("RELOAD")
+    msg = bytes("RELOAD", 'UTF-8')
+    sock.sendall(msg)
 
 def exit():
     #close connection and exit

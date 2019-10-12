@@ -1,7 +1,7 @@
 import socket,os,sys
 
 # def init_server():
-    # check if socket already exists.
+# check if socket already exists.
 sock_addr = "./socket"
 try :
     os.unlink(sock_addr)

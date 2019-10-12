@@ -21,12 +21,32 @@
 			"stdout": "nginx.stdout",
 			"env":[
 				{
-					"key":"STARTED_BY",
-					"value":"taskmaster"
-				},
+					"STARTED_BY":"taskmaster",
+					"ANSWER": 42
+				}
+			]
+		},
+		{
+			"name" : "apache",
+			"cmd": "/Users/sid-bell/Desktop/taskmaster/a.out",
+			"numprocs": 1,
+			"umask": 666,
+			"workingdir": "./",
+			"autostart": false,
+			"autorestart": "unexpected",
+			"exitcodes":
+			[
+				1,127
+			],
+			"startretries": 2,
+			"starttime": 4,
+			"stopsignal": "TERM",
+			"stoptime": 10,
+			"stdout": "apache.stdout",
+			"env":[
 				{
-					"key":"ANSWER",
-					"value":42
+					"STARTED_BY":"taskmaster",
+					"ANSWER": 42
 				}
 			]
 		}

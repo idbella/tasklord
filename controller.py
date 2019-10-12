@@ -1,12 +1,11 @@
-#!/usr/bin/python
-import socket, sys, readline, os
-from loader import loadjson as ljson
+#!/usr/bin/python3
+import socket, sys, readline, os, loader
 
 #initializing connection
-socket_addr = ljson()['socket']
-sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+socket_addr = loader.loadjson()['socket']
 
 try:
+    sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     sock.connect(socket_addr)
 except socket.error:
     print("error connecting to socket:: {}".format(socket_addr), file=sys.stderr)

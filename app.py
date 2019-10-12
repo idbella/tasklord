@@ -1,6 +1,7 @@
 class App:
     pid = 0
     name = None
+    cmd = None
     numprocs = 1
     umask = 644
     workingdir = "/tmp"

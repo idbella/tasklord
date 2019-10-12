@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import socket, sys, readline, os, loader
+import socket, sys, readline, os, loader, fcntl
 
 #initializing connection
 socket_addr = loader.loadjson()['socket']
@@ -48,5 +48,7 @@ while True:
     action = input('Taskmasterctl $> ')
     if builtins.get(action):
         builtins[action]()
+        data = sock.recv(100)
+        print(str(data, "UTF-8") + "$")
         continue
     print("No such command: {}".format(action), file=sys.stderr)

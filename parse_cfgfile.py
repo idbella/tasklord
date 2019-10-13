@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    parse_cfgfile.py                                   :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: yoyassin <yoyassin@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/10/13 16:15:41 by yoyassin          #+#    #+#              #
+#    Updated: 2019/10/13 16:15:43 by yoyassin         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 import loader as l
 import app as proc
 import sys, os
@@ -20,8 +32,7 @@ def validate():
             process.cmd = app[i]['cmd']
         except:
             print("Invalid json file.", file=sys.stderr)
-        if not os.path.exists(process.cmd):
-            print("Invalid command. {}".format(process.cmd), file=sys.stdout)
+            sys.exit(1)
         process.numprocs = app[i].get('numprocs', 1)
         process.umask = app[i].get('umask', 644)
         process.workingdir = app[i].get('workingdir', '/tmp')

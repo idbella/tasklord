@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    ft_builtins.py                                     :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
+#    By: yoyassin <yoyassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/12 19:23:05 by sid-bell          #+#    #+#              #
-#    Updated: 2019/10/12 19:54:45 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/10/13 15:57:08 by yoyassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,11 +38,11 @@ def ft_start(lst, sock, args):
 		run(app, sock)
 
 def ft_builtin(data, lst, sock):
-	if data == "status":
+	if data[0] == "status":
 		ft_status(lst, sock, "")
-	elif data == "start":
+	elif data[0] == "start":
 		ft_start(lst, sock, "")
-	elif data == "stop":
+	elif data[0] == "stop":
 		ft_stop(lst, sock, "")
 	else:
-		print("nothing matched " + data)
+		print("nothing matched " + data[0])

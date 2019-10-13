@@ -4,14 +4,14 @@
 #                                                         :::      ::::::::    #
 #    main.py                                            :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
+#    By: yoyassin <yoyassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/10/12 15:27:18 by sid-bell          #+#    #+#              #
-#    Updated: 2019/10/12 15:27:35 by sid-bell         ###   ########.fr        #
+#    Created: 2019/10/12 15:27:18 by yoyassin          #+#    #+#              #
+#    Updated: 2019/10/12 15:27:35 by yoyassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-import os, sys, time, signal
+import os, sys, time, signal, pickle
 import threading
 
 from daemon import loader
@@ -32,13 +32,13 @@ sock.listen(10)
 def listener(conn):
 	try :
 		while True :
-			data = conn.recv(16)
+			data = bytes(conn.recv(96))
 			if data:
-				data = str(data, 'UTF-8').lower()
-				print("\n" + data)
-				ft_builtins.ft_builtin(data, l['apps'], conn)
+				array = pickle.loads(data)
+				print("data : {}" .format(array))
+				ft_builtins.ft_builtin(array, l['apps'], conn)
 			else:
-				print("not receiving anything from {}".format(client_addr))
+				print("not receiving anything.")
 				break
 	finally:
 		conn.close()

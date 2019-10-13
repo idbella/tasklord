@@ -1,5 +1,17 @@
 #!/usr/bin/python3
-import socket, sys, readline, os, loader, fcntl
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    controller.py                                      :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: yoyassin <yoyassin@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/10/13 10:15:23 by yoyassin          #+#    #+#              #
+#    Updated: 2019/10/13 10:15:23 by yoyassin         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+import socket, sys, readline, os, loader, re, pickle
 
 #initializing connection
 socket_addr = loader.loadjson()['socket']
@@ -11,28 +23,24 @@ except socket.error:
     print("error connecting to socket:: {}".format(socket_addr), file=sys.stderr)
     sys.exit(1)
 
-def start():
-    msg = bytes("START", 'UTF-8')
-    sock.sendall(msg)
+def start(action):
+    sock.sendall(action)
 
-def status():
-    msg = bytes("STATUS", 'UTF-8')
-    sock.sendall(msg)
+def status(action):
+    sock.sendall(action)
 
-def restart():
-    msg = bytes("RESTART", 'UTF-8')
-    sock.sendall(msg)
+def restart(action):
+    sock.sendall(action)
 
-def stop():
-    msg = bytes("STOP", 'UTF-8')
-    sock.sendall(msg)
+def stop(action):
+    sock.sendall(action)
 
-def reload():
-    msg = bytes("RELOAD", 'UTF-8')
-    sock.sendall(msg)
+def reload(action):
+    sock.sendall(action)
 
-def exit():
+def exit(action):
     #close connection and exit
+    sock.close()
     sys.exit(0)
 
 builtins = {'start': start,
@@ -44,10 +52,26 @@ builtins = {'start': start,
 
 #controller loop
 
+def validate_line(line):
+    actions = line.split()
+    patt = re.compile('^[a-zA-Z0-9]+$')
+    for action in actions:
+        if bool(re.match(patt, action)) :
+            continue 
+        else :
+            return None
+    return actions
+
 while True:
-    action = input('Taskmasterctl $> ')
-    if builtins.get(action):
-        builtins[action]()
+    line = input('Taskmasterctl $> ').strip()
+    if not line:
+        continue
+    action = list(validate_line(line))
+    if not action:
+        print("Invalid syntax.")
+        continue
+    if builtins.get(action[0]):
+        builtins[action[0]](pickle.dumps(action, pickle.HIGHEST_PROTOCOL))
         data = sock.recv(100)
         print(str(data, "UTF-8") + "$")
         continue

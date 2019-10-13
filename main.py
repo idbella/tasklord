@@ -4,15 +4,15 @@
 #                                                         :::      ::::::::    #
 #    main.py                                            :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yoyassin <yoyassin@student.42.fr>          +#+  +:+       +#+         #
+#    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/10/12 15:27:18 by yoyassin          #+#    #+#              #
-#    Updated: 2019/10/12 15:27:35 by yoyassin         ###   ########.fr        #
+#    Created: 2019/10/12 15:27:18 by sid-bell          #+#    #+#              #
+#    Updated: 2019/10/12 15:27:35 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-import os, sys, time, signal, pickle
-import threading
+import os, sys, time, signal
+import threading, pickle
 
 from daemon import loader
 from daemon import init_socket
@@ -20,30 +20,32 @@ from daemon import validate
 from daemon import handler
 from daemon import daemon
 from daemon import ft_builtins
+from parse_cfgfile import validate
 
-l = loader.loadjson()
-validate.validate(l)
+lst,socket_addr = validate()
 handler.ft_handle_sigchild()
 daemon.ft_daemon()
-sock = init_socket.init_socket(l['socket'])
+os.unlink("/tmp/socket.sock")
+sock = init_socket.init_socket(socket_addr)
 
 sock.listen(10)
 
 def listener(conn):
 	try :
 		while True :
-			data = bytes(conn.recv(96))
+			data = conn.recv(2048)
 			if data:
 				array = pickle.loads(data)
-				print("data : {}" .format(array))
-				ft_builtins.ft_builtin(array, l['apps'], conn)
+				ft_builtins.ft_builtin(array, lst, conn)
 			else:
-				print("not receiving anything.")
 				break
 	finally:
 		conn.close()
 
 while 1:
-	conn, addr = sock.accept()
-	thr = threading.Thread(target=listener, args=(conn,))
-	thr.start()
+	try:
+		conn, addr = sock.accept()
+		thr = threading.Thread(target=listener, args=(conn,))
+		thr.start()
+	except:
+		pass

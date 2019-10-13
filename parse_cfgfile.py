@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    parse_cfgfile.py                                   :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yoyassin <yoyassin@student.42.fr>          +#+  +:+       +#+         #
+#    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/13 16:15:41 by yoyassin          #+#    #+#              #
-#    Updated: 2019/10/13 16:15:43 by yoyassin         ###   ########.fr        #
+#    Updated: 2019/10/13 16:26:02 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,5 +46,5 @@ def validate():
         process.stdout = app[i].get('stdout')
         process.env = app[i].get('env', [])
         procs_list.append(process)
-    return procs_list
+    return procs_list, cfg_file['socket']
 validate()

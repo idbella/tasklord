@@ -13,4 +13,5 @@ class App:
     stopsignal = 15
     stoptime = 10
     stdout = None
+    stderr = None
     env = []

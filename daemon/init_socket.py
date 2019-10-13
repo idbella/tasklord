@@ -6,7 +6,7 @@
 #    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/12 18:28:22 by sid-bell          #+#    #+#              #
-#    Updated: 2019/10/12 18:28:23 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/10/13 12:31:19 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,6 @@ def init_socket(file):
     try :
         sock.bind(file)
     except :
-        print("unable to bind socket with ")
+        print("unable to bind socket with " + file)
         exit(1)
     return sock

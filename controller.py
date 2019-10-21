@@ -28,6 +28,10 @@ def start(action):
 
 def status(action):
     sock.sendall(action)
+    data = list(str(sock.recv(2048), 'UTF-8').split())
+    print('{} {:^20} {:^10} {:^16}\n{}'.format("NAME", "PID", "STATUS", "DURATION",'-'*50))
+    if data:
+        print('{} {:^20} {:^10} {:^16}\n'.format(data[0], data[1], data[2], data[3]))
 
 def restart(action):
     sock.sendall(action)
@@ -70,9 +74,10 @@ while True:
     if not action:
         print("Invalid syntax.")
         continue
+    if action[0] != "exit" and len(action) < 2:
+        print("Missing arguments") #print help
+        continue
     if builtins.get(action[0]):
         builtins[action[0]](pickle.dumps(action, pickle.HIGHEST_PROTOCOL))
-        data = sock.recv(100)
-        print(str(data, "UTF-8") + "$")
         continue
     print("No such command: {}".format(action), file=sys.stderr)

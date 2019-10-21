@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    ft_builtins.py                                     :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
+#    By: yoyassin <yoyassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/12 19:23:05 by sid-bell          #+#    #+#              #
-#    Updated: 2019/10/13 16:55:46 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/10/13 21:07:55 by yoyassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,16 @@ def ft_send(msg, sock):
 	sock.sendall(msgutf8)
 
 def ft_status(lst, sock, args):
-	for app in lst:
-		ft_send("status of " + app.name, sock)
+	if 'all' in args :
+		for app in lst:
+			ft_send("{} {} {} {}".format(app.name, app.pid, app.status, app.started_at), sock)
+	else :
+		args = args[1:]
+		for arg in args:
+			print(">>>>>>arg<<<<<<{}".format(arg))
+			try :
+				app = lst[]
+			ft_send("{} {} {} {}".format(app.name, app.pid, app.status, app.started_at), sock)
 
 def ft_stop(lst, sock, args):
 	for app in lst:
@@ -31,7 +39,8 @@ def ft_start(lst, sock, args):
 
 def ft_builtin(data, lst, sock):
 	if data[0] == "status":
-		ft_status(lst, sock, "")
+		ft_status(lst, sock, data)
+		print('{}'.format(data))
 	elif data[0] == "start":
 		ft_start(lst, sock, "")
 	elif data[0] == "stop":

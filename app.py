@@ -1,5 +1,7 @@
 class App:
     pid = 0
+    status = 0
+    started_at = 0
     name = None
     cmd = None
     numprocs = 1

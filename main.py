@@ -25,7 +25,10 @@ from parse_cfgfile import validate
 lst,socket_addr = validate()
 handler.ft_handle_sigchild()
 daemon.ft_daemon()
-os.unlink("/tmp/socket.sock")
+try :
+	os.unlink("/tmp/socket")
+except :
+	pass
 sock = init_socket.init_socket(socket_addr)
 
 sock.listen(10)

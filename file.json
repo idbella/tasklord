@@ -4,7 +4,7 @@
 	[
 		{
 			"name" : "nginx",
-			"cmd": "/Users/sid-bell/Desktop/taskmaster/a.out",
+			"cmd": "/Users/yoyassin/Desktop/tasklord/a.out",
 			"numprocs": 2,
 			"umask": 644,
 			"workingdir": "/tmp",

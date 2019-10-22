@@ -6,7 +6,7 @@
 #    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/12 19:23:05 by sid-bell          #+#    #+#              #
-#    Updated: 2019/10/22 21:54:53 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/10/23 00:24:20 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ import os, sys, time, signal, threading
 from daemon import runner
 from app import ft_send
 from app import App
-import logger
+import logger, datetime
 
 def forcekill_timeout(app):
 	time.sleep(app.stoptime)
@@ -27,14 +27,19 @@ def forcekill_timeout(app):
 def ft_status(lst, sock, args):
 	del args[0]
 	all = "all" in args or len(args) == 0
-	ft_send('{}\n {:20}| {:8}| {:16}| {:2}\n{}\n'.format('-'*60, "NAME", "PID", "STATUS", "DURATION",'-'*60), sock)
+	ft_send('\n+{}+\n| {:20}| {:8}| {:16}| {:9}|\n+{}+\n'.format('-'*60, "NAME", "PID", "STATUS", "DURATION",'-'*60), sock)
 	for app in lst:
 		if all or app.name in args:
+			pid = app.pid
 			if app.status == "RUNNING":
-				ft_send(" {:20}| {:8}| {:16}| {:2} sec\n".format(app.name, str(app.pid), app.status, str(int(time.time()) - app.started_at)), sock)
+				uptime = int(time.time() - app.started_at)
+				pid = "-----"
 			else:
-				ft_send(" {:20}| {:8}| {:16} \n".format(app.name, "----", app.status), sock)
-	ft_send('{}\n'.format('-'*60), sock)
+				uptime = 0
+			uptime = datetime.timedelta(seconds=uptime)
+			ft_send("| {:20}| {:8}| {:16}| {:9}|\n".format(app.name, str(pid), app.status, str(uptime)), sock)
+	ft_send('+{}+\n\n'.format('-'*60), sock)
+
 def ft_stop(lst, sock, args):
 	del args[0]
 	all = "all" in args or len(args) == 0

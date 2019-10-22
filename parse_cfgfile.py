@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    parse_cfgfile.py                                   :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yoyassin <yoyassin@student.42.fr>          +#+  +:+       +#+         #
+#    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/13 16:15:41 by yoyassin          #+#    #+#              #
-#    Updated: 2019/10/13 19:36:50 by yoyassin         ###   ########.fr        #
+#    Updated: 2019/10/21 14:25:54 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 import loader as l
 import app as proc
-import sys, os
+import sys, os, copy
 
 def validate():
     cfg_file = l.loadjson()
@@ -45,5 +45,11 @@ def validate():
         process.stoptime = app[i].get('stoptime', 10)
         process.stdout = app[i].get('stdout')
         process.env = app[i].get('env', [])
-        procs_list.append(process)
+        for id in range(process.numprocs):
+            name = process.name;
+            if process.numprocs > 1:
+                name = process.name + ":" + process.name + str(id);
+            new = copy.copy(process)
+            new.name = name;
+            procs_list.append(new)
     return procs_list, cfg_file['socket']

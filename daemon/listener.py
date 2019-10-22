@@ -1,28 +1,28 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    init_socket.py                                     :+:      :+:    :+:    #
+#    listener.py                                        :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/10/12 18:28:22 by sid-bell          #+#    #+#              #
-#    Updated: 2019/10/13 19:09:19 by sid-bell         ###   ########.fr        #
+#    Created: 2019/10/13 19:16:04 by sid-bell          #+#    #+#              #
+#    Updated: 2019/10/21 14:43:59 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-import socket, os
+import pickle
+from daemon import builtins
 
-def init_socket(file):
-    if os.path.exists(file):
-        os.unlink(file)
-    try :
-        sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-    except :
-        print("unable to creat socket")
-        exit(1)
-    try :
-        sock.bind(file)
-    except :
-        print("unable to bind socket with " + file)
-        exit(1)
-    return sock
+def listen(sock, lst):
+	while True :
+		try:
+			data = sock.recv(2048)
+		except:
+			sock.close()
+			break
+		if data:
+			array = pickle.loads(data)
+			builtins.ft_builtin(array, lst, sock)
+			sock.sendall(bytes("end\n", 'UTF-8'));
+		else:
+			break

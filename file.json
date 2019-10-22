@@ -4,11 +4,11 @@
 	[
 		{
 			"name" : "nginx",
-			"cmd": "/Users/sid-bell/Desktop/taskmaster/daemon/a.out",
-			"numprocs": 1,
+			"cmd": "/Users/sid-bell/Desktop/taskmaster/a.out",
+			"numprocs": 2,
 			"umask": 644,
 			"workingdir": "/tmp",
-			"autostart": false,
+			"autostart": true,
 			"autorestart": "unexpected",
 			"exitcodes":
 			[
@@ -16,7 +16,7 @@
 			],
 			"startretries": 3,
 			"starttime": 6,
-			"stopsignal": "TERM",
+			"stopsignal": 11,
 			"stoptime": 10,
 			"stdout": "nginx.stdout",
 			"env":{

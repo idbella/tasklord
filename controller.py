@@ -16,6 +16,14 @@ import socket, sys, readline, os, loader, re, pickle
 #initializing connection
 socket_addr = loader.loadjson()['socket']
 
+def read(sock):
+    strdata = "";
+    while not strdata.endswith("end\n"):
+        data = sock.recv(1)
+        strdata = strdata + str(data, "UTF-8");
+    strdata = strdata[:-4];
+    print(strdata, end='')
+
 try:
     sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     sock.connect(socket_addr)
@@ -25,25 +33,28 @@ except socket.error:
 
 def start(action):
     sock.sendall(action)
+    read(sock)
 
 def status(action):
     sock.sendall(action)
-    data = list(str(sock.recv(2048), 'UTF-8').split())
-    print('{} {:^20} {:^10} {:^16}\n{}'.format("NAME", "PID", "STATUS", "DURATION",'-'*50))
-    if data:
-        print('{} {:^20} {:^10} {:^16}\n'.format(data[0], data[1], data[2], data[3]))
+    read(sock)
+
 
 def restart(action):
     sock.sendall(action)
+    read(sock)
 
 def stop(action):
     sock.sendall(action)
+    read(sock)
 
 def reload(action):
     sock.sendall(action)
+    read(sock)
 
 def exit(action):
     #close connection and exit
+    print("exit")
     sock.close()
     sys.exit(0)
 
@@ -74,7 +85,7 @@ while True:
     if not action:
         print("Invalid syntax.")
         continue
-    if action[0] != "exit" and len(action) < 2:
+    if action[0] != "exit" and action[0] != "status" and len(action) < 2:
         print("Missing arguments") #print help
         continue
     if builtins.get(action[0]):

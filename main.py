@@ -17,38 +17,43 @@ import threading, pickle
 from daemon import loader
 from daemon import init_socket
 from daemon import validate
-from daemon import handler
 from daemon import daemon
-from daemon import ft_builtins
+from daemon import listener
 from parse_cfgfile import validate
+from daemon import builtins
+import logger
+from app import App
 
+logger.init_logger()
 lst,socket_addr = validate()
-handler.ft_handle_sigchild()
-daemon.ft_daemon()
-try :
-	os.unlink("/tmp/socket")
-except :
-	pass
 sock = init_socket.init_socket(socket_addr)
+daemon.ft_daemon()
+logger.log("daemon started\n")
 
+def handler(sig, fr):
+	while True:
+		pid, status = os.waitpid(-1, os.WNOHANG)
+		exitstatus = os.WEXITSTATUS(status)
+		if pid <= 0:
+			break
+		for app in lst:
+			if app.pid == pid:
+				logger.log("app " + app.name + " exited with status " + str(exitstatus) + "\n")
+				app.status = "DONE"
+				if app.state != app.DONE and exitstatus not in app.exitcodes:
+					logger.log("unexpected\n")
+					app.state = App.STOPED
+					if app.autorestart == "unexpected" or app.autorestart == "always":
+						app.failtimes += 1
+						builtins.ft_start(lst, sock, [app.name], False)
+
+signal.signal(signal.SIGCHLD, handler)
 sock.listen(10)
-
-def listener(conn):
-	try :
-		while True :
-			data = conn.recv(2048)
-			if data:
-				array = pickle.loads(data)
-				ft_builtins.ft_builtin(array, lst, conn)
-			else:
-				break
-	finally:
-		conn.close()
-
+builtins.ft_startup(lst, sock)
 while 1:
 	try:
 		conn, addr = sock.accept()
-		thr = threading.Thread(target=listener, args=(conn,))
+		thr = threading.Thread(target=listener.listen, args=(conn,lst))
 		thr.start()
 	except:
 		pass

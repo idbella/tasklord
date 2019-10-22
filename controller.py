@@ -69,12 +69,6 @@ builtins = {'start': start,
 
 def validate_line(line):
     actions = line.split()
-    patt = re.compile('^[a-zA-Z0-9]+$')
-    for action in actions:
-        if bool(re.match(patt, action)) :
-            continue 
-        else :
-            return None
     return actions
 
 while True:
@@ -82,9 +76,6 @@ while True:
     if not line:
         continue
     action = list(validate_line(line))
-    if not action:
-        print("Invalid syntax.")
-        continue
     if action[0] != "exit" and action[0] != "status" and len(action) < 2:
         print("Missing arguments") #print help
         continue

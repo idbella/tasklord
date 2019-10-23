@@ -6,7 +6,7 @@
 #    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/13 16:15:41 by yoyassin          #+#    #+#              #
-#    Updated: 2019/10/21 14:25:54 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/10/23 18:25:00 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ def validate():
         process.stoptime = app[i].get('stoptime', 10)
         process.stdout = app[i].get('stdout')
         process.env = app[i].get('env', [])
+        process.failtimes = 0
         for id in range(process.numprocs):
             name = process.name;
             if process.numprocs > 1:

@@ -6,11 +6,13 @@
 #    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/21 15:11:40 by sid-bell          #+#    #+#              #
-#    Updated: 2019/10/22 19:52:28 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/10/23 19:30:20 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 class App:
+    cfgfile = None
+	lst = None
 	started_at = 0
 	pid = 0
 	status = "STOPPED"

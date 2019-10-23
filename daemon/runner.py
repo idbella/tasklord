@@ -6,14 +6,15 @@
 #    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/13 16:39:58 by sid-bell          #+#    #+#              #
-#    Updated: 2019/10/22 15:02:01 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/10/23 18:29:57 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 import os, time, logger
 from app import ft_send
+from app import App
 
-def run(app, sock):
+def run(app):
 	if os.path.exists(app.cmd) == False :
 		app.status = "FAILED";
 	else:
@@ -34,6 +35,7 @@ def run(app, sock):
 			app.pid = pid
 			app.started_at = int(time.time())
 			app.status = "RUNNING"
+			app.state = App.RUNNING
 		else:
-			app.status = "STOPPED"
+			app.status = "FORK FAILED"
 	return app.status

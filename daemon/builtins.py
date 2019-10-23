@@ -6,71 +6,84 @@
 #    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/12 19:23:05 by sid-bell          #+#    #+#              #
-#    Updated: 2019/10/23 00:24:20 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/10/23 19:07:32 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-import os, sys, time, signal, threading
+import os, sys, time, signal, threading, copy
 from daemon import runner
 from app import ft_send
 from app import App
 import logger, datetime
 
 def forcekill_timeout(app):
-	time.sleep(app.stoptime)
+	sleeptime = 0.2
+	i = 0
+	while i < app.stoptime:
+		if app.status != "RUNNING":
+			break
+		i += sleeptime
+		time.sleep(sleeptime)
 	if app.status == "RUNNING":
 		try:
 			os.kill(app.pid, signal.SIGKILL)
 		finally:
 			app.status = "STOPED"
 
-def ft_status(lst, sock, args):
-	del args[0]
+def ft_status(sock, args):
 	all = "all" in args or len(args) == 0
 	ft_send('\n+{}+\n| {:20}| {:8}| {:16}| {:9}|\n+{}+\n'.format('-'*60, "NAME", "PID", "STATUS", "DURATION",'-'*60), sock)
-	for app in lst:
+	for app in App.lst:
 		if all or app.name in args:
 			pid = app.pid
 			if app.status == "RUNNING":
 				uptime = int(time.time() - app.started_at)
-				pid = "-----"
 			else:
 				uptime = 0
+				pid = "-----"
 			uptime = datetime.timedelta(seconds=uptime)
 			ft_send("| {:20}| {:8}| {:16}| {:9}|\n".format(app.name, str(pid), app.status, str(uptime)), sock)
 	ft_send('+{}+\n\n'.format('-'*60), sock)
 
-def ft_stop(lst, sock, args):
-	del args[0]
-	all = "all" in args or len(args) == 0
-	for app in lst:
+def ft_stop(sock, args, wait):
+	all = "all" in args
+	for app in App.lst:
 		if (all or app.name in args) and app.status == "RUNNING":
 			ft_send("stopping " + app.name + "...\n", sock)
 			os.kill(app.pid, app.stopsignal)
 			app.state = App.DONE
-			thr = threading.Thread(target=forcekill_timeout, args=(app,))
-			thr.start()
+			if wait:
+				forcekill_timeout(app)
+			else:
+				thr = threading.Thread(target=forcekill_timeout, args=(app,))
+				thr.start()
 
-def ft_start(lst, sock, args, log):
-	del args[0]
-	all = "all" in args or len(args) == 0
-	for app in lst:
+def ft_start(sock, args, log):
+	all = "all" in args
+	for app in App.lst:
 		if (all or app.name in args) and app.status != "RUNNING":
 			if log:
 				ft_send("running " + app.name + "\n", sock)
-			runner.run(app, sock)
-		else:
-			logger.log("no\n")
+			logger.log("running {}\n".format(app.name))
+			runner.run(app)
 
-def ft_builtin(data, lst, sock):
-	if data[0] == "status":
-		ft_status(lst, sock, data)
-	elif data[0] == "start":
-		ft_start(lst, sock, data, True)
-	elif data[0] == "stop":
-		ft_stop(lst, sock, data)
+def ft_restart(sock, args):
+	ft_stop(sock, args, True)
+	ft_start(sock, args, True)
 
-def ft_startup(lst, sock):
-	for app in lst:
+def ft_builtin(data, sock):
+	cmd = data[0]
+	del data[0]
+	if cmd == "status":
+		ft_status(sock, data)
+	elif cmd == "start":
+		ft_start(sock, data, True)
+	elif cmd == "stop":
+		ft_stop(sock, data, False)
+	elif cmd == "restart":
+		ft_restart(sock, data)
+
+def ft_startup():
+	for app in App.lst:
 		if app.autostart:
-			runner.run(app, sock)
+			ft_start(None, [app.name], False)

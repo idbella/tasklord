@@ -22,6 +22,7 @@ from daemon import listener
 from parse_cfgfile import validate
 from daemon import builtins
 import logger
+from daemon import handler
 from app import App
 
 logger.init_logger()
@@ -29,31 +30,14 @@ lst,socket_addr = validate()
 sock = init_socket.init_socket(socket_addr)
 daemon.ft_daemon()
 logger.log("daemon started\n")
-
-def handler(sig, fr):
-	while True:
-		pid, status = os.waitpid(-1, os.WNOHANG)
-		exitstatus = os.WEXITSTATUS(status)
-		if pid <= 0:
-			break
-		for app in lst:
-			if app.pid == pid:
-				logger.log("app " + app.name + " exited with status " + str(exitstatus) + "\n")
-				app.status = "DONE"
-				if app.state != app.DONE and exitstatus not in app.exitcodes:
-					logger.log("unexpected\n")
-					app.state = App.STOPED
-					if app.autorestart == "unexpected" or app.autorestart == "always":
-						app.failtimes += 1
-						builtins.ft_start(lst, sock, [app.name], False)
-
-signal.signal(signal.SIGCHLD, handler)
+App.lst = lst
+signal.signal(signal.SIGCHLD, handler.handler)
 sock.listen(10)
-builtins.ft_startup(lst, sock)
+builtins.ft_startup()
 while 1:
 	try:
 		conn, addr = sock.accept()
-		thr = threading.Thread(target=listener.listen, args=(conn,lst))
+		thr = threading.Thread(target=listener.listen, args=(conn,))
 		thr.start()
 	except:
 		pass

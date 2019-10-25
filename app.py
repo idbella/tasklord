@@ -6,19 +6,21 @@
 #    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/21 15:11:40 by sid-bell          #+#    #+#              #
-#    Updated: 2019/10/23 19:30:20 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/10/24 21:41:45 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 class App:
-    cfgfile = None
+	cfgfile = None
 	lst = None
 	started_at = 0
 	pid = 0
 	status = "STOPPED"
 	state = 1
+	original_name = None
 	name = None
 	cmd = None
+	argv = None
 	numprocs = 1
 	umask = 644
 	workingdir = "/tmp"

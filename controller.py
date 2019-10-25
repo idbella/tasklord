@@ -12,9 +12,11 @@
 # **************************************************************************** #
 
 import socket, sys, readline, os, loader, re, pickle
+import signal
 
 #initializing connection
-socket_addr = loader.loadjson()['socket']
+status , json = loader.loadjson(True);
+socket_addr = json['socket']
 
 def read(sock):
     strdata = "";
@@ -52,7 +54,7 @@ def reload(action):
     sock.sendall(action)
     read(sock)
 
-def exit(action):
+def ft_exit(action):
     #close connection and exit
     print("exit")
     sock.close()
@@ -63,7 +65,7 @@ builtins = {'start': start,
             'restart': restart,
             'stop': stop,
             'reload': reload,
-            'exit': exit}
+            'exit': ft_exit}
 
 #controller loop
 
@@ -77,10 +79,16 @@ def validate_line(line):
             return ""
     return actions
 
+def sighandler(sig, frame):
+    ft_exit(None)
+
+signal.signal(signal.SIGINT, sighandler)
+
 while True:
-    line = input('Taskmasterctl $> ').strip()
+    line = input('Taskmasterctl $> ')
     if not line:
         continue
+    line = line.strip()
     action = list(validate_line(line))
     if not action:
         print("Invalid syntax.")

@@ -2,23 +2,27 @@ import json
 import sys
 import os
 
-def loadjson():
+def loadjson(exit_on_error):
+    error = False
     argc = len(sys.argv)
     if argc < 2 :
-        print("No config file is provided.")
+        error = "No config file is provided."
+    if error == False:
+        configfile = sys.argv[1]
+        if os.path.exists(configfile) == False:
+            error = configfile + " no such file or directory"
+        if error == False and os.path.isfile(configfile) == False :
+            error = configfile + " is a directory"
+        if error == False:
+            with open(configfile) as file:
+                try :
+                    lst = json.load(file)
+                    socket = lst['socket']
+                except :
+                    error = configfile + " not a valid json file"
+    if error == False:
+        return True, lst
+    if exit_on_error:
+        print(error)
         exit(1)
-    configfile = sys.argv[1]
-    if os.path.exists(configfile) == False :
-        print(configfile + " no such file or directory")
-        exit(1)
-    if os.path.isfile(configfile) == False :
-        print(configfile + " is a directory")
-        exit(1)
-    with open(configfile) as file:
-        try :
-            lst = json.load(file)
-            socket = lst['socket']
-        except :
-            print(configfile + " not a valid json file", file=sys.stderr)
-            sys.exit(1)
-    return lst
+    return False, error

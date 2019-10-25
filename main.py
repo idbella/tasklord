@@ -26,7 +26,7 @@ from daemon import handler
 from app import App
 
 logger.init_logger()
-lst,socket_addr = validate()
+lst,socket_addr = validate(True)
 sock = init_socket.init_socket(socket_addr)
 daemon.ft_daemon()
 logger.log("daemon started\n")

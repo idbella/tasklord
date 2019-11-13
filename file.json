@@ -3,9 +3,9 @@
 	"apps" :
 	[
 		{
-			"name" : "nginx",
-			"cmd": "/Users/yoyassin/Desktop/tasklord/a.out",
-			"numprocs": 2,
+			"name" : "nginxcc",
+			"cmd": "/Users/yoyassin/Desktop/tasklord/a.out -l",
+			"numprocs": 1,
 			"umask": 644,
 			"workingdir": "/tmp",
 			"autostart": true,
@@ -16,7 +16,7 @@
 			],
 			"startretries": 3,
 			"starttime": 6,
-			"stopsignal": 11,
+			"stopsignal": 28,
 			"stoptime": 10,
 			"stdout": "nginx.stdout",
 			"env":{

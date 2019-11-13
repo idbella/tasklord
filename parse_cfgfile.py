@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    parse_cfgfile.py                                   :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
+#    By: yoyassin <yoyassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/13 16:15:41 by yoyassin          #+#    #+#              #
-#    Updated: 2019/10/24 23:30:36 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/11/13 22:31:26 by yoyassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,11 +52,11 @@ def validate(exit_on_error):
             process.env = app[i].get('env', [])
             process.failtimes = 0
             for id in range(process.numprocs):
-                name = process.name;
+                name = process.name
                 if process.numprocs > 1:
-                    name = process.name + ":" + process.name + str(id);
+                    name = process.name + ":" + process.name + str(id)
                 new = copy.copy(process)
-                new.name = name;
+                new.name = name
                 procs_list.append(new)
     if error != False:
         if exit_on_error:

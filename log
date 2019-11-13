@@ -1,0 +1,22 @@
+27/10/2019 00:54:50 : daemon started
+27/10/2019 00:54:50 : running nginx:nginx0
+27/10/2019 00:54:50 : running nginx:nginx1
+27/10/2019 00:55:45 : running nginx
+27/10/2019 00:57:17 : running nginx
+27/10/2019 00:57:17 : app nginx exited with status 0
+08/11/2019 18:01:06 : daemon started
+08/11/2019 18:01:06 : running nginx
+13/11/2019 20:15:54 : daemon started
+13/11/2019 20:15:54 : running nginx
+13/11/2019 20:16:31 : app nginx exited with status 0
+13/11/2019 22:25:22 : daemon started
+13/11/2019 22:25:22 : running nginx
+13/11/2019 22:25:56 : app nginx exited with status 0
+13/11/2019 22:26:48 : running nginx
+13/11/2019 22:27:14 : running ngiaa
+13/11/2019 22:27:46 : daemon started
+13/11/2019 22:27:46 : running nginx
+13/11/2019 22:27:55 : running nginxcc
+13/11/2019 22:29:24 : daemon started
+13/11/2019 22:29:24 : running nginxcc
+13/11/2019 22:29:53 : app nginxcc exited with status 0

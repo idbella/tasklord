@@ -15,15 +15,15 @@ import socket, sys, readline, os, loader, re, pickle
 import signal
 
 #initializing connection
-status , json = loader.loadjson(True);
+status , json = loader.loadjson(True)
 socket_addr = json['socket']
 
 def read(sock):
-    strdata = "";
+    strdata = ""
     while not strdata.endswith("end\n"):
         data = sock.recv(1)
-        strdata = strdata + str(data, "UTF-8");
-    strdata = strdata[:-4];
+        strdata = strdata + str(data, "UTF-8")
+    strdata = strdata[:-4]
     print(strdata, end='')
 
 try:
@@ -69,6 +69,9 @@ builtins = {'start': start,
 
 #controller loop
 
+def print_help(action):
+    print("Usage:\n\tstatus [...]\n\tstart [...]\n\tstop [...]\n\treload [...]\n\texit\n")
+
 def validate_line(line):
     actions = line.split()
     patt = re.compile('^[a-zA-Z0-9]+:?[a-zA-Z0-9]+$')
@@ -83,6 +86,7 @@ def sighandler(sig, frame):
     ft_exit(None)
 
 signal.signal(signal.SIGINT, sighandler)
+signal.signal(signal.SIGQUIT, signal.SIG_IGN)
 
 while True:
     line = input('Taskmasterctl $> ')
@@ -93,8 +97,9 @@ while True:
     if not action:
         print("Invalid syntax.")
         continue
-    if action[0] != "exit" and action[0] != "status" and len(action) < 2:
-        print("Missing arguments") #print help
+    if action[0] != "exit" and action[0] != "status" and action[0] != "reload" and len(action) < 2:
+        print("Missing arguments")
+        print_help(action)
         continue
     if builtins.get(action[0]):
         builtins[action[0]](pickle.dumps(action, pickle.HIGHEST_PROTOCOL))

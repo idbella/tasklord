@@ -1,9 +1,9 @@
 {
-	"socket":"/tmp/socket",
+	"socket":"/tmp/socket2",
 	"apps" :
 	[
 		{
-			"name" : "nginxcc",
+			"name" : "nginwqex",
 			"cmd": "/Users/yoyassin/Desktop/tasklord/a.out -l",
 			"numprocs": 1,
 			"umask": 644,

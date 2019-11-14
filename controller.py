@@ -12,52 +12,58 @@
 # **************************************************************************** #
 
 import socket, sys, readline, os, loader, re, pickle, rlcompleter
-import signal
+import signal, parse_cfgfile
+from app import App
 
 #initializing connection
-status , json = loader.loadjson(True)
-socket_addr = json['socket']
-
+names = []
 def read(sock):
-    strdata = ""
+    strdata = "";
     while not strdata.endswith("end\n"):
         data = sock.recv(1)
         strdata = strdata + str(data, "UTF-8")
-    strdata = strdata[:-4]
+    strdata = strdata[:-4];
     print(strdata, end='')
 
-try:
-    sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-    sock.connect(socket_addr)
-except socket.error:
-    print("error connecting to socket:: {}".format(socket_addr), file=sys.stderr)
-    sys.exit(1)
+def init_conn(_exit_):
+    proc_list,socket_addr = parse_cfgfile.validate(_exit_)
+    for proc in proc_list :
+        names.append(proc.name)
+    for key in builtins:
+        names.append(key)
+    try:
+        App.socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        App.socket.connect(socket_addr)
+    except socket.error:
+        print("error connecting to socket:: {}".format(socket_addr), file=sys.stderr)
+        sys.exit(1)
 
 def start(action):
-    sock.sendall(action)
-    read(sock)
+    App.socket.sendall(action)
+    read(App.socket)
 
 def status(action):
-    sock.sendall(action)
-    read(sock)
-
+    App.socket.sendall(action)
+    read(App.socket)
 
 def restart(action):
-    sock.sendall(action)
-    read(sock)
+    App.socket.sendall(action)
+    read(App.socket)
 
 def stop(action):
-    sock.sendall(action)
-    read(sock)
+    App.socket.sendall(action)
+    read(App.socket)
 
 def reload(action):
-    sock.sendall(action)
-    read(sock)
+    App.socket.sendall(action)
+    read(App.socket)
+    App.socket.close()
+    init_conn(False)
 
 def ft_exit(action):
     #close connection and exit
     print("exit")
-    sock.close()
+    App.socket.close()
     sys.exit(0)
 
 builtins = {'start': start,
@@ -69,8 +75,9 @@ builtins = {'start': start,
 
 #controller loop
 
+
 def autocomplete(text, state):
-    actions = builtins.keys()
+    actions = names
     options = [action for action in actions if action.startswith(text)]
     if state < len(actions):
         return options[state]
@@ -100,6 +107,7 @@ def sighandler(sig, frame):
 
 signal.signal(signal.SIGINT, sighandler)
 signal.signal(signal.SIGQUIT, signal.SIG_IGN)
+init_conn(True)
 
 while True:
     line = input('Taskmasterctl $> ')

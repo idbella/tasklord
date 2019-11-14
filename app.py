@@ -6,12 +6,13 @@
 #    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/21 15:11:40 by sid-bell          #+#    #+#              #
-#    Updated: 2019/10/24 21:41:45 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/11/14 15:30:17 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 class App:
-	cfgfile = None
+	address = None
+	socket = 0
 	lst = None
 	started_at = 0
 	pid = 0

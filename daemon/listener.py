@@ -6,7 +6,7 @@
 #    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/13 19:16:04 by sid-bell          #+#    #+#              #
-#    Updated: 2019/10/23 17:43:38 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/11/14 15:49:14 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ def listen(sock):
 			break
 		if data:
 			array = pickle.loads(data)
-			builtins.ft_builtin(array, sock)
+			br = builtins.ft_builtin(array, sock)
 			sock.sendall(bytes("end\n", 'UTF-8'));
+			if br:
+				break
 		else:
 			break

@@ -6,7 +6,7 @@
 #    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/13 16:39:58 by sid-bell          #+#    #+#              #
-#    Updated: 2019/10/24 23:59:10 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/11/14 13:19:17 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ from app import App
 
 def run(app):
 	if os.path.exists(app.argv[0]) == False :
+		logger.log("{} command not found\n".format(app.argv[0]))
 		app.status = "FAILED";
 	else:
 		pid = os.fork()
@@ -37,5 +38,5 @@ def run(app):
 			app.status = "RUNNING"
 			app.state = App.RUNNING
 		else:
-			app.status = "FORK FAILED"
+			app.status = "FAILED"
 	return app.status

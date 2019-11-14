@@ -6,7 +6,7 @@
 #    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/12 18:17:37 by sid-bell          #+#    #+#              #
-#    Updated: 2019/10/24 21:48:53 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/11/14 14:49:15 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,15 @@ def handler(sig, unknown):
 		exitcode = os.WEXITSTATUS(status)
 		if pid <= 0:
 			break
+		logger.log("pid = {}\n".format(str(pid)))
 		for app in lst:
 			if app.pid == pid:
-				logger.log("app " + app.name + " exited with status " + str(exitcode) + "\n")
-				app.status = "DONE"
+				if os.WIFEXITED(status):
+					logger.log("app " + app.name + " exited with status " + str(exitcode) + "\n")
+				else:
+					logger.log("app {} recieved signal {}\n".format(app.name, os.WTERMSIG(status)))
 				if app.state != app.DONE:
+					app.status = "DONE"
 					uptime = time.time() - app.started_at
 					if uptime < app.starttime:
 						if app.failtimes < app.startretries:
@@ -40,7 +44,7 @@ def handler(sig, unknown):
 							logger.log("abort {} \n".format(app.name))
 							app.status = "ABORTED"
 							app.state = App.DONE
-					elif exitcode not in app.exitcodes:
+					elif exitcode not in app.exitcodes or os.WIFSIGNALED(status):
 						logger.log("app {} exited with unexpected exit code [{}]\n".format(app.name, exitcode))
 						app.state = App.STOPED
 						if app.autorestart == "unexpected" or app.autorestart == "always":

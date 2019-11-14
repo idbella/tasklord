@@ -31,12 +31,14 @@ sock = init_socket.init_socket(socket_addr)
 daemon.ft_daemon()
 logger.log("daemon started\n")
 App.lst = lst
+App.socket = sock
 signal.signal(signal.SIGCHLD, handler.handler)
 sock.listen(10)
 builtins.ft_startup()
 while 1:
 	try:
-		conn, addr = sock.accept()
+		conn, addr = App.socket.accept()
+		logger.log("new Connection\n")
 		thr = threading.Thread(target=listener.listen, args=(conn,))
 		thr.start()
 	except:

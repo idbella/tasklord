@@ -6,13 +6,14 @@
 #    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/25 17:34:18 by sid-bell          #+#    #+#              #
-#    Updated: 2019/10/25 17:55:35 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/11/14 14:30:06 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 from app import ft_send
 from app import App
 import os,sys,signal,time,threading
+from logger import log
 
 def check_pid(pid):
 	try:
@@ -41,8 +42,11 @@ def ft_stop(sock, args, wait):
 	for app in App.lst:
 		if (all or app.name in args) and app.status == "RUNNING":
 			ft_send("stopping " + app.name + "...\n", sock)
-			os.kill(app.pid, app.stopsignal)
 			app.state = App.DONE
+			try:
+				os.kill(app.pid, app.stopsignal)
+			except OSError:
+				pass
 			if wait:
 				forcekill_timeout(app)
 			else:

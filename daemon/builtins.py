@@ -6,7 +6,7 @@
 #    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/12 19:23:05 by sid-bell          #+#    #+#              #
-#    Updated: 2019/10/25 18:16:48 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/11/14 15:48:55 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ from app import App
 import logger, datetime
 from daemon import reload
 from daemon import ft_stop
+from daemon import init_socket
 
 def ft_status(sock, args):
 	all = "all" in args or len(args) == 0
@@ -60,8 +61,12 @@ def ft_builtin(data, sock):
 	elif cmd == "reload":
 		restart_list = reload.reload(sock)
 		if restart_list != None:
+			App.socket.close()
 			ft_restart(sock, restart_list)
+			App.socket = init_socket.init_socket(App.address)
+			App.socket.listen(10)
 			ft_startup()
+			return True
 
 def ft_startup():
 	for app in App.lst:

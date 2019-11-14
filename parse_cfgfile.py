@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    parse_cfgfile.py                                   :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yoyassin <yoyassin@student.42.fr>          +#+  +:+       +#+         #
+#    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/13 16:15:41 by yoyassin          #+#    #+#              #
-#    Updated: 2019/11/13 22:31:26 by yoyassin         ###   ########.fr        #
+#    Updated: 2019/11/14 16:12:31 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,4 +63,5 @@ def validate(exit_on_error):
             print(error, file=sys.stderr)
             exit(1)
         return False, error
+    proc.App.address = cfg_file['socket']
     return procs_list, cfg_file['socket']

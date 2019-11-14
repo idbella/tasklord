@@ -11,7 +11,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-import socket, sys, readline, os, loader, re, pickle
+import socket, sys, readline, os, loader, re, pickle, rlcompleter
 import signal
 
 #initializing connection
@@ -69,8 +69,21 @@ builtins = {'start': start,
 
 #controller loop
 
+def autocomplete(text, state):
+    actions = builtins.keys()
+    options = [action for action in actions if action.startswith(text)]
+    if state < len(actions):
+        return options[state]
+    else:
+        return None
+
+#autocomplete setup
+readline.parse_and_bind("bind ^I rl_complete")
+readline.set_completer(autocomplete)
+
+
 def print_help(action):
-    print("Usage:\n\tstatus [...]\n\tstart [...]\n\tstop [...]\n\treload [...]\n\texit\n")
+    print("Usage:\n\tstatus\n\tstart [...]\n\tstop [...]\n\treload\n\texit\n")
 
 def validate_line(line):
     actions = line.split()

@@ -6,7 +6,7 @@
 #    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/13 19:16:04 by sid-bell          #+#    #+#              #
-#    Updated: 2019/11/15 16:18:26 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/11/15 22:07:18 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ def listen(sock):
 			data = sock.recv(2048)
 		except:
 			logger.log("enabel to receive data from socket\n")
-			sock.close()
-			break
+			#sock.close()
+			continue
 		if data:
 			array = pickle.loads(data)
 			br = builtins.ft_builtin(array, sock)

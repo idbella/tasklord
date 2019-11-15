@@ -14,6 +14,7 @@
 import socket, sys, readline, os, loader, re, pickle, rlcompleter
 import signal, parse_cfgfile
 from app import App
+import threading
 
 #initializing connection
 names = []
@@ -63,6 +64,7 @@ def reload(action):
     App.socket.sendall(action)
     read(App.socket)
     App.socket.close()
+    names = []
     init_conn(False)
 
 def ft_exit(action):
@@ -70,7 +72,9 @@ def ft_exit(action):
     sys.exit(0)
 
 def shutdown(action):
+    print("GETTING THE FUCK OUT...")
     App.socket.sendall(action)
+    read(App.socket)
     ft_exit(None)
 
 

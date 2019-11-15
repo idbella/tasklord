@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    builtins.py                                        :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yoyassin <yoyassin@student.42.fr>          +#+  +:+       +#+         #
+#    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/12 19:23:05 by sid-bell          #+#    #+#              #
-#    Updated: 2019/11/15 19:14:06 by yoyassin         ###   ########.fr        #
+#    Updated: 2019/11/15 22:41:13 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ def ft_start(sock, args, log):
 			runner.run(app)
 
 def ft_restart(sock, args):
-	ft_stop.ft_stop(sock, args, True)
+	ft_stop.ft_stop(sock, args, True, False)
 	ft_start(sock, args, True)
 
 def ft_builtin(data, sock):
@@ -58,7 +58,7 @@ def ft_builtin(data, sock):
 	elif cmd == "start":
 		ft_start(sock, data, True)
 	elif cmd == "stop":
-		ft_stop.ft_stop(sock, data, False)
+		ft_stop.ft_stop(sock, data, False, False)
 	elif cmd == "restart":
 		ft_restart(sock, data)
 	elif cmd == "reload":
@@ -73,7 +73,7 @@ def ft_builtin(data, sock):
 			ft_startup()
 			return True
 	elif cmd == "shutdown":
-		ft_stop(sock, ["all"], True)
+		ft_stop.ft_stop(sock, ["all"], True, True)
 		logger.log("shuting down daemon\n")
 		App.shutdown = True
 		return True

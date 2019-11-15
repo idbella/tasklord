@@ -6,7 +6,7 @@
 #    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/25 17:34:18 by sid-bell          #+#    #+#              #
-#    Updated: 2019/11/15 16:54:17 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/11/15 22:42:10 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,14 +36,18 @@ def forcekill_timeout(app):
 		except OSError:
 			pass
 	app.status = "STOPED"
-def ft_stop(sock, args, wait):
+
+def ft_stop(sock, args, wait, shutdown):
 	all = "all" in args
 	for app in App.lst:
 		if (all or app.name in args) and app.status == "RUNNING":
 			ft_send("stopping " + app.name + "...\n", sock)
 			app.state = App.DONE
 			try:
-				os.kill(app.pid, app.stopsignal)
+				if shutdown:
+					os.kill(app.pid, signal.SIGTERM)
+				else:
+					os.kill(app.pid, app.stopsignal)
 			except OSError:
 				pass
 			if wait:

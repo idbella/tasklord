@@ -29,13 +29,16 @@ logger.init_logger()
 lst,socket_addr = validate(True)
 sock = init_socket.init_socket(socket_addr)
 daemon.ft_daemon()
-logger.log("daemon started\n")
+logger.log("daemon started {}\n".format(os.getpid()))
 App.lst = lst
 App.socket = sock
 signal.signal(signal.SIGCHLD, handler.handler)
+def rel(sig, frame):
+    builtins.reload.reload(App.socket)
+
+signal.signal(signal.SIGHUP, rel)
 sock.listen(10)
 builtins.ft_startup()
-
 while 1:
 	conn = None
 	if App.shutdown:

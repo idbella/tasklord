@@ -3,16 +3,16 @@
 	"apps" :
 	[
 		{
-			"name" : "a",
+			"name" : "ap",
 			"cmd": "/Users/sid-bell/Desktop/taskmaster/a.out -1 -2 -3",
-			"numprocs": 1,
+			"numprocs": 5,
 			"umask": 644,
 			"workingdir": "/tmp",
 			"autostart": true,
 			"autorestart": "unexpected",
 			"exitcodes":
 			[
-				0
+				1
 			],
 			"startretries": 3,
 			"starttime": 0,

@@ -6,7 +6,7 @@
 #    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/12 18:17:37 by sid-bell          #+#    #+#              #
-#    Updated: 2019/11/15 16:00:00 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/11/15 22:25:31 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ from app import App
 import logger
 from daemon import builtins
 
-def handler(sig, unknown):
+def handler(sig, frame):
 	lst = App.lst
 	while True:
 		try:
@@ -31,6 +31,7 @@ def handler(sig, unknown):
 					logger.log("app " + app.name + " exited with status " + str(exitcode) + "\n")
 				else:
 					logger.log("app {} recieved signal {}\n".format(app.name, os.WTERMSIG(status)))
+				app.status = "STOPED"
 				if app.state != app.DONE:
 					app.status = "DONE"
 					uptime = time.time() - app.started_at

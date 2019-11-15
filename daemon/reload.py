@@ -6,7 +6,7 @@
 #    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/23 19:29:21 by sid-bell          #+#    #+#              #
-#    Updated: 2019/11/15 16:24:24 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/11/15 22:41:51 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,18 +17,18 @@ import logger
 from daemon import ft_stop
 
 def reload(socket):
-    lst,socket_addr = validate(False)
-    if lst == False:
+    newlst,socket_addr = validate(False)
+    if newlst == False:
         ft_send(socket_addr + "\n", socket)
         return None, None
     if (socket_addr == False):
-        ft_send(lst, socket)
+        ft_send(newlst, socket)
         return None, None
     restart_list = []
     for app1 in App.lst:
         found = False
-        for app2 in lst:
-            if app1.original_name == app2.original_name:
+        for app2 in newlst:
+            if app1.original_name == app2.original_name and app1.name == app1.original_name:
                 found = True
                 restart = False
                 if app1.cmd != app2.cmd:
@@ -51,6 +51,6 @@ def reload(socket):
                     app2.pid = app1.pid
                     app2.started_at = app1.started_at
         if found == False:
-            ft_stop.ft_stop(socket, [app1.name], False)
-    App.lst = lst
+            ft_stop.ft_stop(socket, [app1.name], False, True)
+    App.lst = newlst
     return restart_list

@@ -66,12 +66,19 @@ def ft_exit(action):
     App.socket.close()
     sys.exit(0)
 
+def shutdown(action):
+    # stop(["stop"])
+    App.socket.sendall(action)
+    ft_exit(None)
+
+
 builtins = {'start': start,
             'status': status,
             'restart': restart,
             'stop': stop,
             'reload': reload,
-            'exit': ft_exit}
+            'exit': ft_exit,
+            'shutdown': shutdown}
 
 #controller loop
 

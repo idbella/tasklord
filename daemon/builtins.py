@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    builtins.py                                        :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
+#    By: yoyassin <yoyassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/12 19:23:05 by sid-bell          #+#    #+#              #
-#    Updated: 2019/11/14 15:48:55 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/11/15 13:32:46 by yoyassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,10 @@ def ft_builtin(data, sock):
 			App.socket.listen(10)
 			ft_startup()
 			return True
+	elif cmd == "shutdown":
+		App.socket.close()
+		App.shutdown = True
+		return True
 
 def ft_startup():
 	for app in App.lst:

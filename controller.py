@@ -27,10 +27,15 @@ def read(sock):
 
 def init_conn(_exit_):
     proc_list,socket_addr = parse_cfgfile.validate(_exit_)
-    for proc in proc_list :
-        names.append(proc.name)
-    for key in builtins:
-        names.append(key)
+    if proc_list == False :
+        if _exit_:
+            sys.exit(1)
+        print("Something is wrong, couldn't reload config file.")
+    if proc_list :
+        for proc in proc_list :
+            names.append(proc.name)
+        for key in builtins:
+            names.append(key)
     try:
         App.socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
         App.socket.connect(socket_addr)
@@ -98,7 +103,7 @@ def print_help(action):
 
 def validate_line(line):
     actions = line.split()
-    patt = re.compile('^[a-zA-Z0-9]+:?[a-zA-Z0-9]+$')
+    patt = re.compile('^[a-zA-Z]+$|^[a-zA-Z]+:?\s?[a-zA-Z0-9]+')
     for action in actions:
         if bool(re.match(patt, action)) :
             continue 

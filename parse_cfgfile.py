@@ -3,19 +3,22 @@
 #                                                         :::      ::::::::    #
 #    parse_cfgfile.py                                   :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
+#    By: yoyassin <yoyassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/13 16:15:41 by yoyassin          #+#    #+#              #
-#    Updated: 2019/11/14 16:12:31 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/11/15 20:57:55 by yoyassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 import loader as l
 import app as proc
 import sys, os, copy
+import re
+
 
 def validate(exit_on_error):
     error = False
+    patt = re.compile('^[a-zA-Z0-9]+$')
     status, cfg_file = l.loadjson(exit_on_error)
     if status == False:
         error = cfg_file
@@ -36,6 +39,9 @@ def validate(exit_on_error):
                 process.argv = process.cmd.strip().split()
             except:
                 error = "Invalid json file."
+                break
+            if len(process.name) < 1 or len(process.cmd) < 1 or not bool(re.match(patt, process.name)):
+                error = "Bad filename or path."
                 break
             process.original_name = process.name
             process.numprocs = app[i].get('numprocs', 1)
@@ -59,7 +65,9 @@ def validate(exit_on_error):
                 new.name = name
                 procs_list.append(new)
     if error != False:
-        if exit_on_error:
+        if error == "Bad filename or path." and not exit_on_error:
+            return False, cfg_file['socket']
+        elif exit_on_error:
             print(error, file=sys.stderr)
             exit(1)
         return False, error

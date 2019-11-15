@@ -3,7 +3,7 @@
 	"apps" :
 	[
 		{
-			"name" : "",
+			"name" : "a",
 			"cmd": "/Users/sid-bell/Desktop/taskmaster/a.out -1 -2 -3",
 			"numprocs": 1,
 			"umask": 644,

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    builtins.py                                        :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
+#    By: yoyassin <yoyassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/12 19:23:05 by sid-bell          #+#    #+#              #
-#    Updated: 2019/11/15 17:01:43 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/11/15 19:14:06 by yoyassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ def ft_builtin(data, sock):
 		logger.log("reloading configuration file {}\n".format(sys.argv[1]))
 		restart_list = reload.reload(sock)
 		if restart_list != None:
-			logger.log("closing old socket {}\n".format(sys.argv[1]))
+			logger.log("closing old socket {}\n".format(App.address))
 			App.socket.close()
 			ft_restart(sock, restart_list)
 			App.socket = init_socket.init_socket(App.address)

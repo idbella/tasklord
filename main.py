@@ -35,15 +35,16 @@ App.socket = sock
 signal.signal(signal.SIGCHLD, handler.handler)
 sock.listen(10)
 builtins.ft_startup()
-conn = None
+
 while 1:
+	conn = None
 	if App.shutdown:
 		break
 	try:
 		conn, addr = App.socket.accept()
-		logger.log("new Connection\n")
 	except:
 		pass
 	if conn:
+		logger.log("new Connection\n")
 		thr = threading.Thread(target=listener.listen, args=(conn,))
 		thr.start()

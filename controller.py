@@ -20,7 +20,7 @@ names = []
 def read(sock):
     strdata = "";
     while not strdata.endswith("end\n"):
-        data = sock.recv(1)
+        data = sock.recv(100)
         strdata = strdata + str(data, "UTF-8")
     strdata = strdata[:-4];
     print(strdata, end='')
@@ -61,13 +61,10 @@ def reload(action):
     init_conn(False)
 
 def ft_exit(action):
-    #close connection and exit
     print("exit")
-    App.socket.close()
     sys.exit(0)
 
 def shutdown(action):
-    # stop(["stop"])
     App.socket.sendall(action)
     ft_exit(None)
 
@@ -125,11 +122,15 @@ while True:
     if not action:
         print("Invalid syntax.")
         continue
-    if action[0] != "exit" and action[0] != "status" and action[0] != "reload" and len(action) < 2:
+    if action[0] != "shutdown" and action[0] != "exit" and action[0] != "status" and action[0] != "reload" and len(action) < 2:
         print("Missing arguments")
         print_help(action)
         continue
+
     if builtins.get(action[0]):
-        builtins[action[0]](pickle.dumps(action, pickle.HIGHEST_PROTOCOL))
+        try:
+            builtins[action[0]](pickle.dumps(action, pickle.HIGHEST_PROTOCOL))
+        except IOError:
+            print("can't connect to daemon")
         continue
     print("No such command: {}".format(action), file=sys.stderr)

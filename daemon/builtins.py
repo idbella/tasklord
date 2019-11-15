@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    builtins.py                                        :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yoyassin <yoyassin@student.42.fr>          +#+  +:+       +#+         #
+#    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/12 19:23:05 by sid-bell          #+#    #+#              #
-#    Updated: 2019/11/15 13:32:46 by yoyassin         ###   ########.fr        #
+#    Updated: 2019/11/15 17:01:43 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ from daemon import init_socket
 
 def ft_status(sock, args):
 	all = "all" in args or len(args) == 0
-	ft_send('\n+{}+\n| {:20}| {:8}| {:16}| {:9}|\n+{}+\n'.format('-'*60, "NAME", "PID", "STATUS", "DURATION",'-'*60), sock)
+	pid = -2
+	output = '\n+{}+\n| {:20}| {:8}| {:16}| {:9}|\n+{}+\n'.format('-'*60, "NAME", "PID", "STATUS", "DURATION",'-'*60)
 	for app in App.lst:
 		if all or app.name in args:
 			pid = app.pid
@@ -31,8 +32,10 @@ def ft_status(sock, args):
 				uptime = 0
 				pid = "-----"
 			uptime = datetime.timedelta(seconds=uptime)
-			ft_send("| {:20}| {:8}| {:16}| {:9}|\n".format(app.name, str(pid), app.status, str(uptime)), sock)
-	ft_send('+{}+\n\n'.format('-'*60), sock)
+			output = output + "| {:20}| {:8}| {:16}| {:9}|\n".format(app.name, str(pid), app.status, str(uptime))
+	if pid != -2:
+		output = output + '+{}+\n\n'.format('-'*60)
+		ft_send(output, sock)
 
 def ft_start(sock, args, log):
 	all = "all" in args
@@ -59,8 +62,10 @@ def ft_builtin(data, sock):
 	elif cmd == "restart":
 		ft_restart(sock, data)
 	elif cmd == "reload":
+		logger.log("reloading configuration file {}\n".format(sys.argv[1]))
 		restart_list = reload.reload(sock)
 		if restart_list != None:
+			logger.log("closing old socket {}\n".format(sys.argv[1]))
 			App.socket.close()
 			ft_restart(sock, restart_list)
 			App.socket = init_socket.init_socket(App.address)
@@ -68,7 +73,8 @@ def ft_builtin(data, sock):
 			ft_startup()
 			return True
 	elif cmd == "shutdown":
-		App.socket.close()
+		ft_stop(sock, ["all"], True)
+		logger.log("shuting down daemon\n")
 		App.shutdown = True
 		return True
 

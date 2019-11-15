@@ -1,79 +1,89 @@
-14/11/2019 16:20:11 : daemon started
-14/11/2019 16:20:11 : running nginxcc
-14/11/2019 16:20:11 : new Connection
-14/11/2019 16:20:28 : running nginx
-14/11/2019 16:20:28 : new Connection
-14/11/2019 16:20:39 : pid = 71619
-14/11/2019 16:20:49 : daemon started
-14/11/2019 16:20:49 : running nginx
-14/11/2019 16:20:49 : new Connection
-14/11/2019 16:21:35 : daemon started
-14/11/2019 16:21:35 : running nginx
-14/11/2019 16:21:35 : new Connection
-14/11/2019 16:21:43 : new Connection
-14/11/2019 16:21:49 : daemon started
-14/11/2019 16:21:49 : running nginx
-14/11/2019 16:21:49 : new Connection
-14/11/2019 16:31:40 : daemon started
-14/11/2019 16:31:40 : running nginx
-14/11/2019 16:37:07 : daemon started
-14/11/2019 16:37:07 : running nginx
-14/11/2019 16:37:08 : new Connection
-14/11/2019 16:37:11 : new Connection
-14/11/2019 16:37:18 : running nginwqex
-14/11/2019 16:37:18 : new Connection
-14/11/2019 16:37:28 : pid = 73597
-14/11/2019 16:38:50 : daemon started
-14/11/2019 16:38:50 : running nginwqex
-14/11/2019 16:38:50 : new Connection
-14/11/2019 16:41:06 : daemon started
-14/11/2019 16:41:06 : running nginwqex
-14/11/2019 16:41:06 : new Connection
-14/11/2019 16:41:47 : daemon started
-14/11/2019 16:41:47 : running nginwqex
-14/11/2019 16:41:47 : new Connection
-14/11/2019 16:47:47 : daemon started
-14/11/2019 16:47:47 : running nginwqex
-14/11/2019 16:48:04 : daemon started
-14/11/2019 16:48:04 : running nginwqex
-14/11/2019 16:50:17 : daemon started
-14/11/2019 16:50:17 : running nginwqex
-14/11/2019 16:52:04 : daemon started
-14/11/2019 16:52:04 : running nginwqex
-14/11/2019 16:52:04 : new Connection
-14/11/2019 16:52:40 : daemon started
-14/11/2019 16:52:40 : running nginwqex
-14/11/2019 16:52:40 : new Connection
-14/11/2019 16:53:30 : daemon started
-14/11/2019 16:53:30 : running nginwqex
-14/11/2019 16:53:30 : new Connection
-14/11/2019 16:53:44 : daemon started
-14/11/2019 16:53:44 : running nginwqex
-14/11/2019 16:53:44 : new Connection
-14/11/2019 16:53:56 : daemon started
-14/11/2019 16:53:56 : running nginwqex
-14/11/2019 16:53:56 : new Connection
-14/11/2019 16:54:12 : daemon started
-14/11/2019 16:54:12 : running nginwqex
-14/11/2019 16:54:12 : new Connection
-14/11/2019 16:54:26 : daemon started
-14/11/2019 16:54:26 : running nginwqex
-14/11/2019 16:54:26 : new Connection
-14/11/2019 16:54:33 : daemon started
-14/11/2019 16:54:33 : running nginwqex
-14/11/2019 16:54:33 : new Connection
-14/11/2019 16:55:27 : daemon started
-14/11/2019 16:55:27 : running nginwqex
-14/11/2019 16:55:27 : new Connection
-14/11/2019 16:56:28 : daemon started
-14/11/2019 16:56:28 : running nginwqex
-14/11/2019 16:56:28 : new Connection
-14/11/2019 16:56:49 : daemon started
-14/11/2019 16:56:49 : running nginwqex
-14/11/2019 16:56:49 : new Connection
-14/11/2019 16:57:31 : daemon started
-14/11/2019 16:57:31 : running nginwqex
-14/11/2019 16:57:31 : new Connection
-14/11/2019 16:57:42 : daemon started
-14/11/2019 16:57:42 : running nginwqex
-14/11/2019 16:57:42 : new Connection
+15/11/2019 16:35:54 : initialize new socket
+15/11/2019 16:35:54 : daemon started
+15/11/2019 16:35:54 : running nginwq
+15/11/2019 16:35:55 : app nginwq exited with status 0
+15/11/2019 16:35:55 : new Connection
+15/11/2019 16:35:59 : running nginwq
+15/11/2019 16:35:59 : app nginwq exited with status 0
+15/11/2019 17:01:45 : initialize new socket
+15/11/2019 17:01:45 : daemon started
+15/11/2019 17:01:45 : running nginwq
+15/11/2019 17:01:45 : new Connection
+15/11/2019 17:01:53 : app nginwq exited with status 0
+15/11/2019 17:02:25 : initialize new socket
+15/11/2019 17:02:25 : daemon started
+15/11/2019 17:02:25 : running nginwq
+15/11/2019 17:02:25 : new Connection
+15/11/2019 17:02:33 : app nginwq exited with status 0
+15/11/2019 17:03:49 : running nginwq
+15/11/2019 17:03:57 : app nginwq exited with status 0
+15/11/2019 17:04:29 : initialize new socket
+15/11/2019 17:04:29 : daemon started
+15/11/2019 17:04:29 : running nginwq
+15/11/2019 17:04:29 : new Connection
+15/11/2019 17:04:37 : app nginwq exited with status 0
+15/11/2019 18:46:11 : initialize new socket
+15/11/2019 18:46:11 : daemon started
+15/11/2019 18:46:11 : running nginwq
+15/11/2019 18:46:11 : new Connection
+15/11/2019 18:46:19 : app nginwq exited with status 0
+15/11/2019 18:46:43 : reloading configuration file file.json
+15/11/2019 18:46:43 : closing old socket file.json
+15/11/2019 18:46:43 : initialize new socket
+15/11/2019 18:46:43 : running 
+15/11/2019 18:46:43 : new Connection
+15/11/2019 18:46:51 : app  exited with status 0
+15/11/2019 18:47:19 : reloading configuration file file.json
+15/11/2019 18:47:19 : closing old socket file.json
+15/11/2019 18:47:19 : initialize new socket
+15/11/2019 18:47:19 : running 
+15/11/2019 18:47:19 : new Connection
+15/11/2019 18:47:27 : app  exited with status 0
+15/11/2019 18:47:35 : reloading configuration file file.json
+15/11/2019 18:47:35 : closing old socket file.json
+15/11/2019 18:47:35 : initialize new socket
+15/11/2019 18:47:35 : running 
+15/11/2019 18:47:35 : new Connection
+15/11/2019 18:47:43 : app  exited with status 0
+15/11/2019 18:48:15 : reloading configuration file file.json
+15/11/2019 18:48:15 : closing old socket file.json
+15/11/2019 18:48:15 : initialize new socket
+15/11/2019 18:48:15 : running :0
+15/11/2019 18:48:15 : running :1
+15/11/2019 18:48:15 : running :2
+15/11/2019 18:48:15 : running :3
+15/11/2019 18:48:15 : running :4
+15/11/2019 18:48:15 : running :5
+15/11/2019 18:48:15 : running :6
+15/11/2019 18:48:15 : running :7
+15/11/2019 18:48:15 : running :8
+15/11/2019 18:48:15 : running :9
+15/11/2019 18:48:15 : new Connection
+15/11/2019 18:48:23 : app :6 exited with status 0
+15/11/2019 18:48:23 : app :3 exited with status 0
+15/11/2019 18:48:23 : app :2 exited with status 0
+15/11/2019 18:48:23 : app :1 exited with status 0
+15/11/2019 18:48:23 : app :0 exited with status 0
+15/11/2019 18:48:23 : app :5 exited with status 0
+15/11/2019 18:48:23 : app :4 exited with status 0
+15/11/2019 18:48:23 : app :9 exited with status 0
+15/11/2019 18:48:23 : app :7 exited with status 0
+15/11/2019 18:48:23 : app :8 exited with status 0
+15/11/2019 18:48:25 : reloading configuration file file.json
+15/11/2019 18:48:25 : closing old socket file.json
+15/11/2019 18:48:25 : initialize new socket
+15/11/2019 18:48:25 : running 
+15/11/2019 18:48:25 : new Connection
+15/11/2019 18:48:33 : app  exited with status 0
+15/11/2019 18:48:34 : reloading configuration file file.json
+15/11/2019 18:48:34 : closing old socket file.json
+15/11/2019 18:48:34 : initialize new socket
+15/11/2019 18:48:34 : running a
+15/11/2019 18:48:34 : new Connection
+15/11/2019 18:48:42 : app a exited with status 0
+15/11/2019 18:48:54 : reloading configuration file file.json
+15/11/2019 18:48:54 : closing old socket file.json
+15/11/2019 18:48:54 : initialize new socket
+15/11/2019 18:48:54 : running 
+15/11/2019 18:48:54 : new Connection
+15/11/2019 18:49:02 : app  exited with status 0

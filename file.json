@@ -3,8 +3,8 @@
 	"apps" :
 	[
 		{
-			"name" : "nginwqex",
-			"cmd": "/Users/yoyassin/Desktop/tasklord/a.out -l",
+			"name" : "",
+			"cmd": "/Users/sid-bell/Desktop/taskmaster/a.out -1 -2 -3",
 			"numprocs": 1,
 			"umask": 644,
 			"workingdir": "/tmp",
@@ -12,10 +12,10 @@
 			"autorestart": "unexpected",
 			"exitcodes":
 			[
-				1
+				0
 			],
 			"startretries": 3,
-			"starttime": 6,
+			"starttime": 0,
 			"stopsignal": 28,
 			"stoptime": 10,
 			"stdout": "nginx.stdout",

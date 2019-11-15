@@ -6,7 +6,7 @@
 #    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/25 17:34:18 by sid-bell          #+#    #+#              #
-#    Updated: 2019/11/14 14:30:06 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/11/15 16:54:17 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,15 +20,14 @@ def check_pid(pid):
 		os.kill(pid, 0)
 	except OSError:
 		return False
-	else:
-		return True
+	return True
 
 def forcekill_timeout(app):
 	sleeptime = 0.1
 	i = 0
 	while i < app.stoptime:
 		if check_pid(app.pid) == False:
-			break
+			return
 		i += sleeptime
 		time.sleep(sleeptime)
 	if check_pid(app.pid):

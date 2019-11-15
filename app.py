@@ -3,14 +3,15 @@
 #                                                         :::      ::::::::    #
 #    app.py                                             :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yoyassin <yoyassin@student.42.fr>          +#+  +:+       +#+         #
+#    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/21 15:11:40 by sid-bell          #+#    #+#              #
-#    Updated: 2019/11/15 11:35:19 by yoyassin         ###   ########.fr        #
+#    Updated: 2019/11/15 16:32:01 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 class App:
+	logfilefd = -1
 	shutdown = False
 	address = None
 	socket = 0

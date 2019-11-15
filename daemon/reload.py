@@ -6,7 +6,7 @@
 #    By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/23 19:29:21 by sid-bell          #+#    #+#              #
-#    Updated: 2019/11/14 15:29:19 by sid-bell         ###   ########.fr        #
+#    Updated: 2019/11/15 16:24:24 by sid-bell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ def reload(socket):
     if (socket_addr == False):
         ft_send(lst, socket)
         return None, None
-    restart_list = [];
+    restart_list = []
     for app1 in App.lst:
         found = False
         for app2 in lst:

@@ -4,21 +4,22 @@
 	[
 		{
 			"name" : "ap",
-			"cmd": "/Users/sid-bell/Desktop/taskmaster/a.out -1 -2 -3",
+			"cmd": "/Users/yoyassin/Desktop/tasklord/a.out -1 -2 -3",
 			"numprocs": 5,
-			"umask": 644,
+			"umask": "022",
 			"workingdir": "/tmp",
 			"autostart": true,
 			"autorestart": "unexpected",
 			"exitcodes":
 			[
-				1
+				0
 			],
 			"startretries": 3,
 			"starttime": 0,
 			"stopsignal": 28,
 			"stoptime": 10,
 			"stdout": "nginx.stdout",
+			"stderr": "nginx.stderr",
 			"env":{
 					"STARTED_BY":"taskmaster",
 					"ANSWER":"42"

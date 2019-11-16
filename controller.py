@@ -41,7 +41,7 @@ def init_conn(_exit_):
         App.socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
         App.socket.connect(socket_addr)
     except socket.error:
-        print("error connecting to socket:: {}".format(socket_addr), file=sys.stderr)
+        print("error connecting to socket: {}".format(socket_addr), file=sys.stderr)
         sys.exit(1)
 
 def start(action):
@@ -142,4 +142,4 @@ while True:
         except IOError:
             print("can't connect to daemon")
         continue
-    print("No such command: {}".format(action), file=sys.stderr)
+    print("No such command: {}".format(action[0]), file=sys.stderr)

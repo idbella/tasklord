@@ -6,7 +6,7 @@
 #    By: yoyassin <yoyassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/13 16:15:41 by yoyassin          #+#    #+#              #
-#    Updated: 2019/11/15 20:57:55 by yoyassin         ###   ########.fr        #
+#    Updated: 2019/11/16 14:14:40 by yoyassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ import loader as l
 import app as proc
 import sys, os, copy
 import re
-
 
 def validate(exit_on_error):
     error = False
@@ -45,7 +44,7 @@ def validate(exit_on_error):
                 break
             process.original_name = process.name
             process.numprocs = app[i].get('numprocs', 1)
-            process.umask = app[i].get('umask', 644)
+            process.umask = int(app[i].get('umask', 644), base=8)
             process.workingdir = app[i].get('workingdir', '/tmp')
             process.autostart = app[i].get('autostart')
             process.autorestart = app[i].get('autorestart', 'unexpected')
@@ -55,6 +54,7 @@ def validate(exit_on_error):
             process.stopsignal = app[i].get('stopsignal', 15)
             process.stoptime = app[i].get('stoptime', 10)
             process.stdout = app[i].get('stdout')
+            process.stderr = app[i].get('stderr')
             process.env = app[i].get('env', [])
             process.failtimes = 0
             for id in range(process.numprocs):

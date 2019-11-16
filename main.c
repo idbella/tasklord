@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sid-bell <sid-bell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yoyassin <yoyassin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 00:00:25 by sid-bell          #+#    #+#             */
-/*   Updated: 2019/11/15 22:08:59 by sid-bell         ###   ########.fr       */
+/*   Updated: 2019/11/16 09:26:45 by yoyassin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int main(int x, char **a)
     {
         sleep(2);
         dprintf(1, "i2 = %s\n", a[i]);
+        dprintf(2, "errs = %s\n", a[i]);
         i++;
     }
 }

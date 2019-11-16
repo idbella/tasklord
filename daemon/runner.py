@@ -6,7 +6,7 @@
 #    By: yoyassin <yoyassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/13 16:39:58 by sid-bell          #+#    #+#              #
-#    Updated: 2019/11/16 09:33:13 by yoyassin         ###   ########.fr        #
+#    Updated: 2019/11/16 14:19:00 by yoyassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ def run(app):
 				fd = os.open(app.stderr, os.O_WRONLY | os.O_CREAT | os.O_APPEND)
 				os.dup2(fd, 2)	
 			os.umask(app.umask)
+			logger.log("umask : {}\n".format(app.umask))
 			try:
 				os.execve(app.argv[0], app.argv, app.env)
 			except:

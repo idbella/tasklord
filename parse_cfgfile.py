@@ -6,7 +6,7 @@
 #    By: yoyassin <yoyassin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/13 16:15:41 by yoyassin          #+#    #+#              #
-#    Updated: 2019/11/16 14:14:40 by yoyassin         ###   ########.fr        #
+#    Updated: 2019/11/16 15:36:46 by yoyassin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,8 @@ def validate(exit_on_error):
                 break
             process.original_name = process.name
             process.numprocs = app[i].get('numprocs', 1)
-            process.umask = int(app[i].get('umask', 644), base=8)
+            process.umask = app[i].get('umask', 644)
+            process.umask = int(process.umask, base=8) if process.umask[0] == '0' else int(process.umaske)
             process.workingdir = app[i].get('workingdir', '/tmp')
             process.autostart = app[i].get('autostart')
             process.autorestart = app[i].get('autorestart', 'unexpected')

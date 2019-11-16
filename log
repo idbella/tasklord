@@ -1,0 +1,75 @@
+16/11/2019 15:35:07 : initialize new socket
+16/11/2019 15:35:07 : daemon started 14196
+16/11/2019 15:35:07 : running ap:ap0
+16/11/2019 15:35:07 : running ap:ap1
+16/11/2019 15:35:07 : running ap:ap2
+16/11/2019 15:35:07 : umask : 777
+16/11/2019 15:35:07 : running ap:ap3
+16/11/2019 15:35:07 : umask : 777
+16/11/2019 15:35:07 : running ap:ap4
+16/11/2019 15:35:07 : umask : 777
+16/11/2019 15:35:07 : umask : 777
+16/11/2019 15:35:07 : umask : 777
+16/11/2019 15:35:07 : app ap:ap4 exited with status 0
+16/11/2019 15:35:07 : app ap:ap3 exited with status 0
+16/11/2019 15:35:07 : app ap:ap2 exited with status 0
+16/11/2019 15:35:07 : app ap:ap1 exited with status 0
+16/11/2019 15:35:07 : app ap:ap0 exited with status 0
+16/11/2019 15:35:07 : new Connection
+16/11/2019 15:35:34 : reloading configuration file file.json
+16/11/2019 15:35:34 : closing old socket /tmp/socket2
+16/11/2019 15:35:34 : initialize new socket
+16/11/2019 15:35:34 : running ap:ap0
+16/11/2019 15:35:34 : running ap:ap1
+16/11/2019 15:35:34 : running ap:ap2
+16/11/2019 15:35:34 : umask : 777
+16/11/2019 15:35:34 : umask : 777
+16/11/2019 15:35:34 : running ap:ap3
+16/11/2019 15:35:34 : umask : 777
+16/11/2019 15:35:34 : running ap:ap4
+16/11/2019 15:35:34 : umask : 777
+16/11/2019 15:35:34 : new Connection
+16/11/2019 15:35:34 : umask : 777
+16/11/2019 15:35:34 : app ap:ap4 exited with status 0
+16/11/2019 15:35:34 : app ap:ap2 exited with status 0
+16/11/2019 15:35:34 : app ap:ap0 exited with status 0
+16/11/2019 15:35:34 : app ap:ap1 exited with status 0
+16/11/2019 15:35:34 : app ap:ap3 exited with status 0
+16/11/2019 15:35:46 : reloading configuration file file.json
+16/11/2019 15:35:46 : closing old socket /tmp/socket2
+16/11/2019 15:35:46 : initialize new socket
+16/11/2019 15:35:46 : running ap:ap0
+16/11/2019 15:35:46 : running ap:ap1
+16/11/2019 15:35:46 : running ap:ap2
+16/11/2019 15:35:46 : umask : 511
+16/11/2019 15:35:46 : running ap:ap3
+16/11/2019 15:35:46 : umask : 511
+16/11/2019 15:35:46 : running ap:ap4
+16/11/2019 15:35:46 : umask : 511
+16/11/2019 15:35:46 : umask : 511
+16/11/2019 15:35:46 : new Connection
+16/11/2019 15:35:46 : umask : 511
+16/11/2019 15:35:46 : app ap:ap3 exited with status 0
+16/11/2019 15:35:46 : app ap:ap2 exited with status 0
+16/11/2019 15:35:46 : app ap:ap1 exited with status 0
+16/11/2019 15:35:46 : app ap:ap0 exited with status 0
+16/11/2019 15:35:46 : app ap:ap4 exited with status 0
+16/11/2019 15:35:51 : reloading configuration file file.json
+16/11/2019 15:35:51 : closing old socket /tmp/socket2
+16/11/2019 15:35:51 : initialize new socket
+16/11/2019 15:35:51 : running ap:ap0
+16/11/2019 15:35:51 : running ap:ap1
+16/11/2019 15:35:51 : running ap:ap2
+16/11/2019 15:35:51 : running ap:ap3
+16/11/2019 15:35:51 : umask : 511
+16/11/2019 15:35:51 : umask : 511
+16/11/2019 15:35:51 : running ap:ap4
+16/11/2019 15:35:51 : umask : 511
+16/11/2019 15:35:51 : umask : 511
+16/11/2019 15:35:51 : app ap:ap0 exited with status 0
+16/11/2019 15:35:51 : umask : 511
+16/11/2019 15:35:51 : new Connection
+16/11/2019 15:35:51 : app ap:ap3 exited with status 0
+16/11/2019 15:35:51 : app ap:ap2 exited with status 0
+16/11/2019 15:35:51 : app ap:ap1 exited with status 0
+16/11/2019 15:35:51 : app ap:ap4 exited with status 0

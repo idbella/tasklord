@@ -6,7 +6,7 @@
 			"name" : "ap",
 			"cmd": "/Users/yoyassin/Desktop/tasklord/a.out -1 -2 -3",
 			"numprocs": 5,
-			"umask": "022",
+			"umask": "644",
 			"workingdir": "/tmp",
 			"autostart": true,
 			"autorestart": "unexpected",
